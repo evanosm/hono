@@ -68,7 +68,8 @@ projects
 
 		const updatedProject =
 			await sql`UPDATE projects SET "name" = ${project.name}, "type" = ${project.type}, "desc" = ${project.desc}, "year" = ${project.year}, "role" = ${project.role}, "image" = ${project.image}, "isFreelance" = ${project.isFreelance}, "isFeatured" = ${project.isFeatured}, "url" = ${project.url} WHERE "id" = ${id}`;
-			c.status(200);
+			
+		c.status(200);
 		return c.json({ message: "Project updated successfully" });
 	});
 

@@ -9,15 +9,13 @@ import projects from "./routes/projects.route";
 const port = parseInt(process.env.PORT) || 3000;
 const app = new Hono();
 
-// Custom logger
-app.use("*", async (c, next) => {
-	//log metho, request and ip address of the request to the console
 
+app.use("*", async (c, next) => {
 	if (c.req.param("id")) {
     console.log(`${c.req.method} ${c.req.url}| (at ${new Date().toLocaleString()}))`);
     console.log(`🪄 - See on website at: https://www.vean.fr/projects/${c.req.param("id")}`)
 
-	} else {
+  } else {
 		console.log(`${c.req.method} ${c.req.url} | (at ${new Date().toLocaleString()}))`);
 	}
 	await next();

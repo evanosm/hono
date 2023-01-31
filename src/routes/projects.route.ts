@@ -38,18 +38,18 @@ projects
 			return c.json({ message: "Project not found" });
 		}
 
-		project.name = project.name || projectToUpdate.name;
-		project.type = project.type || projectToUpdate.type;
-		project.desc = project.desc || projectToUpdate.desc;
-		project.year = project.year || projectToUpdate.year;
-		project.role = project.role || projectToUpdate.role;
-		project.image = project.image || projectToUpdate.image;
-		project.isFreelance = project.isFreelance || projectToUpdate.isFreelance;
-		project.isFeatured = project.isFeatured || projectToUpdate.isFeatured;
-		project.url = project.url || projectToUpdate.url;
+		project.name === null || project.name === undefined ? (project.name = projectToUpdate[0].name) : project.name;
+		project.type === null || project.type === undefined ? (project.type = projectToUpdate[0].type) : project.type;
+		project.desc === null || project.desc === undefined ? (project.desc = projectToUpdate[0].desc) : project.desc;
+		project.year === null || project.year === undefined ? (project.year = projectToUpdate[0].year) : project.year;
+		project.role === null || project.role === undefined ? (project.role = projectToUpdate[0].role) : project.role;
+		project.image === null || project.image === undefined ? (project.image = projectToUpdate[0].image) : project.image;
+		project.isFreelance === null || project.isFreelance === undefined ? (project.isFreelance = projectToUpdate[0].isFreelance) : project.isFreelance;
+		project.isFeatured === null || project.isFeatured === undefined ? (project.isFeatured = projectToUpdate[0].isFeatured) : project.isFeatured;
+		project.url === null || project.url === undefined ? (project.url = projectToUpdate[0].url) : project.url;
 
 		const updatedProject =
-			await sql`UPDATE projects SET name = ${project.name}, type = ${project.type}, desc = ${project.desc}, year = ${project.year}, role = ${project.role}, image = ${project.image}, isFreelance = ${project.isFreelance}, isFeatured = ${project.isFeatured}, url = ${project.url} WHERE id = ${id}`;
+			await sql`UPDATE projects SET "name" = ${project.name}, "type" = ${project.type}, "desc" = ${project.desc}, "year" = ${project.year}, "role" = ${project.role}, "image" = ${project.image}, "isFreelance" = ${project.isFreelance}, "isFeatured" = ${project.isFeatured}, "url" = ${project.url} WHERE "id" = ${id}`;
 		return c.json(updatedProject);
 	});
 

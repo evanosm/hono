@@ -5,7 +5,9 @@
     "bun-types": "latest"
   },
   "dependencies": {
-    "hono": "^2.2.5"
+    "hono": "^2.2.5",
+    "postgres": "^3.3.3",
+    "uuid": "^9.0.0"
   },
   "scripts": {
     "start": "bun run src/index.ts"

@@ -1,21 +1,47 @@
-# Hono with Bun runtime
+# REST API for my Portfolio !
 
-## Getting Started
+## Stack
 
-### Cloning the repo
+- Bun (JS Runtime)
+- Typescript
+- Hono ("Ultrafast web framework", it is)
+- PostgreSQL
 
-```sh
-bun create hono ./NAME_HERE
+## Routes
+
+### Get all projects
+```
+GET /projects/
 ```
 
-### Development
-
+### Create a project
 ```
-bun run start
+POST /projects/
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+- /!\ With body :
 
-### For more information
+```json
+{
+    "name": "Stocknet",
+    "type": "dev",
+    "desc": "Projet de test",
+    "year": "2023",
+    "role": "ouais",
+    "image": "https://picsum.photos/500/600",
+    "isFreelance": false,
+    "isFeatured": true,
+    "url": "https://github.com/evanosm"
+}
+```
 
-See <https://honojs.dev/>
+### Delete a project
+```
+DELETE /projects/:id
+```
+
+### Update a project
+```
+PUT /projects/:id
+```
+> NB : no need to include all fields in this update request as we fetch the project to update and fill missing fields with its current values ! 🥳

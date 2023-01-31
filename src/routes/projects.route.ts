@@ -1,10 +1,13 @@
 import { Hono } from "hono";
 import sql from "../../utils/db";
 import { Project } from "../models/project.model";
-
 import { v4 as uuidv4 } from "uuid";
 
+import { bearerAuth } from 'hono/bearer-auth';
+
 const projects = new Hono();
+
+projects.use('/', bearerAuth({ token: process.env.API_TOKEN } as any))
 
 projects
 	.get("/", async (c) => {

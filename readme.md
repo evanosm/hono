@@ -1,13 +1,17 @@
 # REST API for my Portfolio !
 
-## Stack
+## 💻 - Stack
 
 - Bun (JS Runtime)
 - Typescript
 - Hono ("Ultrafast web framework", it is)
 - PostgreSQL
 
-## Routes
+## 💬 - Informations 
+
+This project is a full CRUD REST API made by myself using javascript ! It uses Bearer token auth stored in env. variables, PostgreSQL queries, UUID generator, and more ! Feel free to star ⭐️ this poject, it helps me a lot !
+
+## 🛤️ - Routes
 
 ### Get all projects
 ```
@@ -19,7 +23,7 @@ GET /projects/
 POST /projects/
 ```
 
-- /!\ With body :
+- ⚠️ With body :
 
 ```json
 {

@@ -12,8 +12,19 @@ projects.use('/', bearerAuth({ token: process.env.API_TOKEN } as any))
 projects
 	.get("/", async (c) => {
 		return sql`SELECT * FROM projects`.then((projects) => {
+			c.status(200);
 			return c.json(projects);
 		});
+	})
+	.get("/:id", async (c) => { 
+		const id = c.req.param("id");
+		const project = await sql`SELECT * FROM projects WHERE id = ${id}`;
+		if (!project) {
+			c.status(404)
+			return c.json({ message: "Project not found" });
+		}
+		c.status(200);
+		return c.json(project);
 	})
 	.post("/", async (c) => {
 		const project = (await c.req.json()) as Project;
@@ -21,7 +32,8 @@ projects
 		console.log(project?.desc);
 		return sql`INSERT INTO projects ("id", "name", "type", "desc", "year", "role", "image", "isFreelance", "isFeatured", "url") VALUES (${project.id}, ${project.name}, ${project.type}, ${project.desc}, ${project.year}, ${project.role}, ${project.image}, ${project.isFreelance}, ${project.isFeatured}, ${project.url})`.then(
 			(project) => {
-				return c.json(project);
+				c.status(201);
+				return c.json({message: "Project created successfully"});
 			},
 		);
 	})
@@ -29,15 +41,18 @@ projects
 		const id = c.req.param("id");
 		const project = await sql`DELETE FROM projects WHERE id = ${id}`;
 		if (!project) {
+			c.status(404)
 			return c.json({ message: "Project not found" });
 		}
-		return c.json(project);
+		c.status(200);
+		return c.json({ message: "Project deleted successfully" });
 	})
 	.put("/:id", async (c) => {
 		const id = c.req.param("id");
 		const project = (await c.req.json()) as Project;
 		const projectToUpdate = await sql`SELECT * FROM projects WHERE id = ${id}`;
 		if (!projectToUpdate) {
+			c.status(404)
 			return c.json({ message: "Project not found" });
 		}
 
@@ -53,7 +68,8 @@ projects
 
 		const updatedProject =
 			await sql`UPDATE projects SET "name" = ${project.name}, "type" = ${project.type}, "desc" = ${project.desc}, "year" = ${project.year}, "role" = ${project.role}, "image" = ${project.image}, "isFreelance" = ${project.isFreelance}, "isFeatured" = ${project.isFeatured}, "url" = ${project.url} WHERE "id" = ${id}`;
-		return c.json(updatedProject);
+			c.status(200);
+		return c.json({ message: "Project updated successfully" });
 	});
 
 export default projects;

@@ -11,6 +11,7 @@ const sql = postgres(
 );
 
 const [{ version }] = await sql`SELECT version()`;
+console.log(`----------------| API VEAN INIT |----------------`);
 console.log(`PostgreSQL version: ${version}`);
 
 export default sql;

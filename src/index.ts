@@ -5,16 +5,19 @@ import { serveStatic } from "hono/serve-static.bun";
 
 // routes
 import projects from "./routes/projects.route";
+import stats from "./routes/stats.route";
 
 // constants
 const port = parseInt(process.env.PORT) || 3000;
 const app = new Hono();
+
 //CORS
 app.use('/projects/*', cors({
 	origin: '*',
 	allowMethods: ['GET'],
 }))
 
+//Middleware
 app.use("*", async (c, next) => {
 	if (c.req.param("id")) {
 		console.log(
@@ -33,10 +36,11 @@ app.use("*", async (c, next) => {
 	await next();
 });
 
-app.use("/favicon.ico", serveStatic({ path: "./public/favicon.ico" }));
-
+//Routes
 app.route("/projects", projects);
+app.route("/stats", stats);
 
+//Serve app
 console.log(`------------------------------------`);
 console.log(`Running at http://localhost:${port}, press CTRL+C to stop`);
 console.log(`Launched at ${new Date().toLocaleString()}`);

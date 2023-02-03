@@ -71,7 +71,7 @@ projects
 			
 		c.status(200);
 		return c.json({ message: "Project updated successfully" });
-	}).get("/projects/count", async (c) => {
+	}).get("/countProjects", async (c) => {
 		const count = await sql`SELECT COUNT(*) FROM projects`;
 		c.status(200);
 		return c.json(count);
